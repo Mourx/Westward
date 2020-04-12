@@ -1,0 +1,18 @@
+[
+  {
+    "id":0,
+    "area":"DummyEncounter",
+    "level":0,
+    "minChallenge":0,
+    "maxChallenge":0,
+    "enemies":[]
+  },
+  {
+    "id":1,
+    "area":"woods",
+    "level":1,
+    "minChallenge":1,
+    "maxChallenge":2,
+    "enemies":[1,2,3]
+  }
+]

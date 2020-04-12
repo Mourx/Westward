@@ -7,9 +7,9 @@
 class Combat
 {
 public:
-	Combat(std::vector<Combatant> playerMain, std::vector<Combatant> playerSupport, Encounter encounter);
+	Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playerSupport, Encounter* encounter);
 	~Combat();
-	std::vector<Combatant> units;
+	std::vector<Combatant*> units;
 	std::vector<std::vector<Tile>> combatGrid;
 };
 

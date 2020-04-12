@@ -1,0 +1,46 @@
+[
+  {
+    "id": 0,
+    "name":"DummyEnemy",
+    "damage":0,
+    "health":0,
+    "level":0,
+    "challengeValue":0,
+    "frontLine" : true,
+    "hasSpells": false,
+    "spellList": null
+  },
+  {
+    "id": 1,
+    "name":"Spider",
+    "damage":5,
+    "health":10,
+    "level":1,
+    "challengeValue":0.1,
+    "frontLine" : true,
+    "hasSpells": false,
+    "spellList": null
+  },
+  {
+    "id": 2,
+    "name":"Goblin",
+    "damage":10,
+    "health":20,
+    "level":1,
+    "challengeValue":0.25,
+    "frontLine" : true,
+    "hasSpells": false,
+    "spellList": null
+  },
+  {
+    "id": 3,
+    "name":"Wisp",
+    "damage":0,
+    "health":15,
+    "level":1,
+    "challengeValue":0.4,
+    "frontLine" : false,
+    "hasSpells": true,
+    "spellList": 1
+  }
+]

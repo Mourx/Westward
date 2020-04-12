@@ -27,6 +27,18 @@
     <ClInclude Include="Encounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EncounterList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json-forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp">
@@ -41,5 +53,22 @@
     <ClCompile Include="Encounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EncounterList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="encounters.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="enemies.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
