@@ -1,2 +1,3 @@
-﻿  main.cpp
-  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\Westward\Debug\Westward.exe
+﻿  Encounter.cpp
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(43): warning C4244: '=': conversion from 'Json::Value::Int' to 'float', possible loss of data
+  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\WestWardProject\Westward\Debug\Westward.exe

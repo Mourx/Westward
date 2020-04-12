@@ -1,13 +1,11 @@
 #include "Encounter.h"
-
+#include <random>
 
 
 Encounter::Encounter(int id)
 {
-	
-	ifstream encStream("encounters.json");
-	ifstream monStream("enemies.json");
 
+	ifstream encStream("encounters.json");
 	CharReaderBuilder reader;
 	Value obj;
 	string errs;
@@ -16,21 +14,30 @@ Encounter::Encounter(int id)
 	};
 	for (Value v : obj) {
 		if (v["id"] == id) {
-			area.assign(v["area"].asString);
+			area.assign(v["area"].asString());
 			Value arr = v["enemies"];
 			for (Value en : arr) {
-				possibleEnemies.push_back(en.asInt);
+				possibleEnemies.push_back(en.asInt());
 			}
-			minChallenge = v["minChallenge"].asFloat;
-			maxChallenge = v["maxChallenge"].asFloat;
-			encounterLevel = v["level"].asInt;
+			minChallenge = v["minChallenge"].asFloat();
+			maxChallenge = v["maxChallenge"].asFloat();
+			encounterLevel = v["level"].asInt();
 			break;
 		}
 	}
 
-
-
-
+	float currentChallenge = 0;
+	while (currentChallenge < maxChallenge && enemies.size() < 4) {
+		if (currentChallenge >= minChallenge && rand() % 30 > 25) {
+			break;
+		}
+		int r = (rand() % possibleEnemies.size());
+		enemies.push_back(new Combatant(new Enemy(r)));
+		currentChallenge = 0;
+		for (Combatant* c : enemies) {
+			currentChallenge += c->unit->getChallengeValue();
+		}
+	}
 }
 
 
@@ -39,6 +46,5 @@ Encounter::~Encounter()
 }
 
 vector<Combatant*> Encounter::getEnemies() {
-	vector<Combatant*> e;
-	return e;
+	return enemies;
 }

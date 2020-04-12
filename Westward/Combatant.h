@@ -1,9 +1,11 @@
 #pragma once
+#include "EnemyDefinitions.h"
+
 class Combatant
 {
 public:
-	Combatant();
+	Combatant(Enemy* e);
 	~Combatant();
-
+	Enemy* unit;
 };
 

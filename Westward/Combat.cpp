@@ -6,13 +6,35 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 {
 	for (Combatant* c : playerMain) {
 		units.push_back(c);
+		if (c->unit->getFrontLine()) {
+			playerFront.push_back(c);
+		}
+		else {
+			playerBack.push_back(c);
+		}
 	}
 	for (Combatant* c : playerSupport) {
 		units.push_back(c);
+		if (c->unit->getFrontLine()) {
+			playerFront.push_back(c);
+		}
+		else {
+			playerBack.push_back(c);
+		}
 	}
 	std::vector<Combatant*> enemies = encounter->getEnemies();
 	for (Combatant* c : enemies) {
 		units.push_back(c);
+		if (c->unit->getFrontLine()) {
+			playerFront.push_back(c);
+		}
+		else {
+			playerBack.push_back(c);
+		}
+	}
+
+	for (Combatant* c : units) {
+		
 	}
 }
 

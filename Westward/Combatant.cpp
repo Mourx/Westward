@@ -2,8 +2,9 @@
 
 
 
-Combatant::Combatant()
+Combatant::Combatant(Enemy* e)
 {
+	unit = e;
 }
 
 

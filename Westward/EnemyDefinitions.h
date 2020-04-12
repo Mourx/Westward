@@ -1,5 +1,9 @@
 #pragma once
-#include <json.h>
+#include "json.h"
+#include <iostream>
+#include <fstream>
+using namespace Json;
+using namespace std;
 class VirtualEnemy {
 public:
 	VirtualEnemy() {
@@ -7,6 +11,39 @@ public:
 	}
 	~VirtualEnemy() {
 
+	}
+	
+protected:
+	int health;
+	int damage;
+	int level;
+	string name;
+	float challengeValue;
+	bool bFrontLine;
+	bool bHasSpells;
+};
+
+class Enemy : VirtualEnemy {
+public:
+	Enemy(int EnemyType) {
+		ifstream monStream("enemies.json");
+
+		CharReaderBuilder reader;
+		Value obj;
+		string errs;
+
+		if (parseFromStream(reader, monStream, &obj, &errs)) {
+			cout << errs << endl;
+		}
+
+		name.assign(obj[EnemyType]["name"].asString());
+		health = obj[EnemyType]["health"].asInt();
+		damage = obj[EnemyType]["damage"].asInt();
+		level = obj[EnemyType]["level"].asInt();
+		challengeValue = obj[EnemyType]["challengeValue"].asInt();
+		bFrontLine = obj[EnemyType]["frontLine"].asBool();
+		bHasSpells = obj[EnemyType]["hasSpells"].asBool();
+		//spellList = obj[EnemyType]["spellList"].asInt();
 	}
 	int getHealth() {
 		return health;
@@ -26,24 +63,9 @@ public:
 	bool getHasSpells() {
 		return bHasSpells;
 	}
-	
-protected:
-	int health;
-	int damage;
-	int level;
-	float challengeValue;
-	bool bFrontLine;
-	bool bHasSpells;
-};
-
-class Enemy : VirtualEnemy {
-	Enemy(int EnemyType) {
-		health = 20;
-		damage = 10;
-		level = 1;
-		challengeValue = 0.25;
-		bFrontLine = true;
-		bHasSpells = false;
+	string getName() {
+		return name;
 	}
+
 };
 
