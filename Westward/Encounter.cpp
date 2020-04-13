@@ -1,16 +1,17 @@
 #include "Encounter.h"
 #include <random>
+#include <ctime>
 
 
 Encounter::Encounter(int id)
 {
-
+	std::srand(std::time(nullptr));
 	ifstream encStream("encounters.json");
 	CharReaderBuilder reader;
 	Value obj;
 	string errs;
 	if (parseFromStream(reader, encStream, &obj, &errs)) {
-		cout << errs << endl;
+		//cout << errs << endl;
 	};
 	for (Value v : obj) {
 		if (v["id"] == id) {
@@ -31,7 +32,7 @@ Encounter::Encounter(int id)
 		if (currentChallenge >= minChallenge && rand() % 30 > 25) {
 			break;
 		}
-		int r = (rand() % possibleEnemies.size());
+		int r = (rand() % possibleEnemies.size()) + 1;
 		enemies.push_back(new Combatant(new Enemy(r)));
 		currentChallenge = 0;
 		for (Combatant* c : enemies) {

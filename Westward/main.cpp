@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-	
+	cout << "A group of Enemies Approach!" << endl << endl;
 	vector<Combatant*> playerMain;
 	vector<Combatant*> playerSupport;
 	playerMain.push_back(new Combatant(new Enemy(1)));
@@ -14,7 +14,7 @@ int main() {
 	Encounter* encounter = new Encounter(1);
 	Combat* combat = new Combat(playerMain,playerSupport,encounter);
 	for (Combatant* c : encounter->getEnemies()) {
-		cout << "name: " << c->unit->getName() << endl;
+		//cout << "name: " << c->unit->getName() << endl;
 	}
 	
 

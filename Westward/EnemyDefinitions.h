@@ -33,7 +33,7 @@ public:
 		string errs;
 
 		if (parseFromStream(reader, monStream, &obj, &errs)) {
-			cout << errs << endl;
+			//cout << errs << endl;
 		}
 
 		name.assign(obj[EnemyType]["name"].asString());
