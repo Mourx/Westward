@@ -1,6 +1,2 @@
-﻿  Combat.cpp
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(45): warning C4244: '=': conversion from 'Json::Value::Int' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\combat.cpp(8): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\joel\documents\westward\westward\westward\combat.cpp(84): warning C4018: '<': signed/unsigned mismatch
-c:\users\joel\documents\westward\westward\westward\combat.cpp(217): warning C4018: '>=': signed/unsigned mismatch
-  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\Westward\Debug\Westward.exe
+﻿  Modifier.cpp
+  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\WestWardProject\Westward\Debug\Westward.exe

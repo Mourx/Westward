@@ -3,6 +3,7 @@
 #include "Combatant.h"
 #include "TileRow.h"
 #include "Encounter.h"
+#include "enums.h"
 
 class Combat
 {

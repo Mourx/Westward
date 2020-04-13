@@ -2,8 +2,12 @@
 #include "json.h"
 #include <iostream>
 #include <fstream>
+#include "enums.h"
+#include "Modifier.h"
+
 using namespace Json;
 using namespace std;
+
 class VirtualEnemy {
 public:
 	VirtualEnemy() {
@@ -14,14 +18,19 @@ public:
 	}
 	
 protected:
-	int health;
-	int damage;
-	int speed;
-	int level;
+	float health;
+	float damage;
+	float speed;
+	float level;
 	string name;
 	float challengeValue;
 	bool bFrontLine;
 	bool bHasSpells;
+
+	vector<Modifier*> mods;
+	float comHealth;
+	float comDamage;
+	float comSpeed;
 };
 
 class Enemy : VirtualEnemy {
@@ -38,25 +47,25 @@ public:
 		}
 
 		name.assign(obj[EnemyType]["name"].asString());
-		health = obj[EnemyType]["health"].asInt();
-		damage = obj[EnemyType]["damage"].asInt();
-		speed = obj[EnemyType]["speed"].asInt();
-		level = obj[EnemyType]["level"].asInt();
-		challengeValue = obj[EnemyType]["challengeValue"].asInt();
+		health = obj[EnemyType]["health"].asFloat();
+		damage = obj[EnemyType]["damage"].asFloat();
+		speed = obj[EnemyType]["speed"].asFloat();
+		level = obj[EnemyType]["level"].asFloat();
+		challengeValue = obj[EnemyType]["challengeValue"].asFloat();
 		bFrontLine = obj[EnemyType]["frontLine"].asBool();
 		bHasSpells = obj[EnemyType]["hasSpells"].asBool();
 		//spellList = obj[EnemyType]["spellList"].asInt();
 	}
-	int getHealth() {
+	float getHealth() {
 		return health;
 	}
-	int getDamage() {
+	float getDamage() {
 		return damage;
 	}
-	int getSpeed() {
+	float getSpeed() {
 		return speed;
 	}
-	int getLevel() {
+	float getLevel() {
 		return level;
 	}
 	float getChallengeValue() {
@@ -71,6 +80,38 @@ public:
 	string getName() {
 		return name;
 	}
-
+	void addModifier(Modifier* m) {
+		mods.push_back(m);
+	}
+	void tickModifiers() {
+		for (int i = 0; i < mods.size();i++) {
+			mods[i]->Tick();
+			if (mods[i]->CheckExpire()) {
+				mods.erase(mods.begin()+i);
+				i--;
+			}
+		}
+	}
+	void ApplyModifiers() {
+		float totHealthMod = 0;
+		float totDamageMod = 0;
+		float totSpeedMod = 0;
+		for (Modifier* m : mods) {
+			switch (m->getAtt()) {
+			case HEALTH:
+				totHealthMod += m->getValue();
+				break;
+			case DAMAGE:
+				totDamageMod += m->getValue();
+				break;
+			case SPEED:
+				totSpeedMod += m->getValue();
+				break;
+			}
+		}
+		comHealth = health * (1.0 + totHealthMod / 100.0);
+		comDamage = damage * (1.0 + totHealthMod / 100.0);
+		comSpeed = speed * (1.0 + totHealthMod / 100.0);
+	}
 };
 

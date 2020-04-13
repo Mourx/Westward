@@ -39,6 +39,12 @@
     <ClInclude Include="TileRow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Modifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp">
@@ -60,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileRow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -99,25 +99,13 @@ void Combat::ShowGrid() {
 	cout << endl;
 }
 
-enum CombatActions {
-	ATTACK,
-	DEFEND
-};
-
-enum CombatTargets {
-	FRONT_ONE,
-	FRONT_TWO,
-	FRONT_THREE,
-	FRONT_FOUR,
-	BACK_ONE,
-	BACK_TWO,
-	BACK_THREE,
-	BACK_FOUR,
-};
 
 bool Combat::RunCombat() {
 	bIsCombat = true;
 	while (bIsCombat) {
+		for (Combatant* c : turnOrder) {
+			c->unit->ApplyModifiers();
+		}
 		if (turnOrder[turn]->IsPlayer()){
 			bool bValidAction = false;
 			while (bValidAction == false) {
@@ -213,9 +201,11 @@ bool Combat::RunCombat() {
 				}
 			}
 		}
+		turnOrder[turn]->unit->tickModifiers();
 		turn++;
 		if (turn >= turnOrder.size()) {
 			turn = 0;
+
 		}
 	}
 	return 1;
