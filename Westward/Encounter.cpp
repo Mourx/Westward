@@ -33,7 +33,7 @@ Encounter::Encounter(int id)
 			break;
 		}
 		int r = (rand() % possibleEnemies.size()) + 1;
-		enemies.push_back(new Combatant(new Enemy(r)));
+		enemies.push_back(new Combatant(new Enemy(r),false));
 		currentChallenge = 0;
 		for (Combatant* c : enemies) {
 			currentChallenge += c->unit->getChallengeValue();

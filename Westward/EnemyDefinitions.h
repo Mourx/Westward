@@ -16,6 +16,7 @@ public:
 protected:
 	int health;
 	int damage;
+	int speed;
 	int level;
 	string name;
 	float challengeValue;
@@ -39,6 +40,7 @@ public:
 		name.assign(obj[EnemyType]["name"].asString());
 		health = obj[EnemyType]["health"].asInt();
 		damage = obj[EnemyType]["damage"].asInt();
+		speed = obj[EnemyType]["speed"].asInt();
 		level = obj[EnemyType]["level"].asInt();
 		challengeValue = obj[EnemyType]["challengeValue"].asInt();
 		bFrontLine = obj[EnemyType]["frontLine"].asBool();
@@ -50,6 +52,9 @@ public:
 	}
 	int getDamage() {
 		return damage;
+	}
+	int getSpeed() {
+		return speed;
 	}
 	int getLevel() {
 		return level;
