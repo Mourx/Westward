@@ -70,20 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;..\SFML-2.5.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;..\SFML-2.5.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;..\SFML-2.5.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;..\SFML-2.5.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;..\SFML-2.5.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;..\SFML-2.5.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Joel\Documents\Westward\Westward\lib;..\SFML-2.5.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Joel\Documents\Westward\Westward\include;..\SFML-2.5.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,6 +93,9 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Joel\Documents\Westward\Westward\jsonCPP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -102,6 +105,9 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Joel\Documents\Westward\Westward\jsonCPP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -116,6 +122,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,6 +138,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -144,6 +152,7 @@
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileRow.h" />
+    <ClInclude Include="Values.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp" />

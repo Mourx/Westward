@@ -16,6 +16,11 @@ enum CombatTargets {
 	BACK_FOUR,
 };
 
+enum CombatPhases {
+	ACTION,
+	TARGET
+};
+
 enum Attributes {
 	HEALTH,
 	DAMAGE,

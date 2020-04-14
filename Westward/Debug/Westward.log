@@ -1,2 +1,17 @@
-﻿  Modifier.cpp
-  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\WestWardProject\Westward\Debug\Westward.exe
+﻿  main.cpp
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(112): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(113): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(114): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QAE@PBDABVlocale@std@@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::~String(void)" (__imp_??1String@sf@@QAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QAE@III@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QAE@VVideoMode@1@ABVString@1@IABUContextSettings@1@@Z) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual class sf::Vector2<unsigned int> __thiscall sf::RenderWindow::getSize(void)const " (__imp_?getSize@RenderWindow@sf@@UBE?AV?$Vector2@I@2@XZ) referenced in function _main
+..\SFML-2.5.0\lib\sfml-graphics-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\SFML-2.5.0\lib\sfml-window-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\SFML-2.5.0\lib\sfml-system-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\SFML-2.5.0\lib\sfml-network-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\SFML-2.5.0\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Joel\Documents\Westward\WestWardProject\Westward\Debug\Westward.exe : fatal error LNK1120: 6 unresolved externals

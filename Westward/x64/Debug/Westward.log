@@ -1,0 +1,16 @@
+﻿  Combat.cpp
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(112): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(113): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(114): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(8): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(72): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(137): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(112): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(113): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(114): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\main.cpp(23): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(180): warning C4715: 'Combat::DoAction': not all control paths return a value
+  Westward.vcxproj -> C:\Users\Joel\Documents\Westward\WestWardProject\Westward\x64\Debug\Westward.exe

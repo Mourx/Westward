@@ -68,9 +68,39 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	combatGrid.push_back(eRFront);
 	combatGrid.push_back(pRFront);
 	combatGrid.push_back(pRBack);
+
+	if (!font.loadFromFile("arial.ttf"));
+
+	for (int j = 0; j < combatGrid.size();j++) {
+		TileRow* tr = combatGrid[j];
+		for (int i = 0; i < tr->getRow().size(); i++) {
+			Tile* tile = tr->getTile(i);
+			sf::Text text;
+			
+			text.setFont(font);
+			if (tile->getCombatant() != NULL) {
+				text.setString(tile->getCombatant()->unit->getName());
+			}
+			else {
+				text.setString("| | | |");
+			}
+			
+			
+			text.setPosition(i*50,j*50);
+			text.setFillColor(sf::Color::White);
+			text.setCharacterSize(14);
+			combatGridText.push_back(text);
+		}
+	}
 	ShowGrid();
 	
 	generateTurnOrder();
+}
+
+void Combat::Draw(sf::RenderWindow* window) {
+	for (sf::Text t : combatGridText) {
+		window->draw(t);
+	}
 }
 
 Combat::~Combat()
@@ -99,6 +129,68 @@ void Combat::ShowGrid() {
 	cout << endl;
 }
 
+Combatant* Combat::getUnit(int index) {
+	return(units[index]);
+}
+
+int Combat::getUnitsSize() {
+	return units.size();
+}
+
+bool Combat::DoAction(int action) {
+	//string actionStr;
+	cout << endl;
+	cout << turnOrder[turn]->unit->getName() << "'s turn. Choose Action:  \n0\tAttack\n1\tDefend" << endl;
+	//getline(cin, actionStr);
+	//int action = stoi(actionStr);
+	if (turnOrder[turn]->IsPlayer()) {
+		if (phase == TARGET) {
+			CombatActions acts = CombatActions(action);
+			switch (acts) {
+			case ATTACK:
+				ShowGrid();
+				cout << "Choose target:  \n4\t5\t6\t7\n0\t1\t2\t3" << endl;
+				phase = TARGET;
+				return true;
+				//getline(cin, actionStr);
+				//action = stoi(actionStr);
+				break;
+			case DEFEND:
+				//add defense modifier
+				bValidAction = true;
+				AdvanceTurn();
+				return true;
+				break;
+			default:
+				return false;
+			}
+		}
+
+		if (phase == TARGET){
+			if (combatGrid[action/4]->TileContains(action/4)) {
+				//attack target
+				// Attack(getUnit(action);
+				bValidTarget = true;
+			}
+			else {
+				cout << "Please select a valid target" << endl;
+			}
+		}
+	}
+}
+
+void Combat::AdvanceTurn() {
+	turnOrder[turn]->unit->tickModifiers();
+	turn++;
+	if (turn >= turnOrder.size()) {
+		turn = 0;
+
+	}
+	if (!turnOrder[turn]->IsPlayer()) {
+		DoAction(0);
+		DoAction(0);
+	}
+}
 
 bool Combat::RunCombat() {
 	bIsCombat = true;
@@ -109,104 +201,10 @@ bool Combat::RunCombat() {
 		if (turnOrder[turn]->IsPlayer()){
 			bool bValidAction = false;
 			while (bValidAction == false) {
-				string actionStr;
-				cout << endl;
-				cout << turnOrder[turn]->unit->getName() << "'s turn. Choose Action:  \n0\tAttack\n1\tDefend" << endl;
-				getline(cin, actionStr);
-				int action = stoi(actionStr);
-				bool bValidTarget = false;
-				CombatActions acts = CombatActions(action);
-				switch (acts) {
-				case ATTACK:
-					while (bValidTarget == false) {
-						ShowGrid();
-						cout << "Choose target:  \n4\t5\t6\t7\n0\t1\t2\t3" << endl;
-						getline(cin, actionStr);
-						action = stoi(actionStr);
-						CombatTargets targs = CombatTargets(action);
-						switch (targs) {
-						case FRONT_ONE:
-							if (combatGrid[1]->TileContains(0)) {
-								//attack target
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case FRONT_TWO:
-							if (combatGrid[1]->TileContains(1)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case FRONT_THREE:
-							if (combatGrid[1]->TileContains(2)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case FRONT_FOUR:
-							if (combatGrid[1]->TileContains(3)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case BACK_ONE:
-							if (combatGrid[0]->TileContains(0)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case BACK_TWO:
-							if (combatGrid[0]->TileContains(1)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case BACK_THREE:
-							if (combatGrid[0]->TileContains(2)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						case BACK_FOUR:
-							if (combatGrid[0]->TileContains(3)) {
-								bValidTarget = true;
-							}
-							else {
-								cout << "Please select a valid target" << endl;
-							}
-							break;
-						}
-					}
-					bValidAction = true;
-					break;
-				case DEFEND:
-					//add defense modifier
-					bValidAction = true;
-					break;
-				}
+				
 			}
 		}
-		turnOrder[turn]->unit->tickModifiers();
-		turn++;
-		if (turn >= turnOrder.size()) {
-			turn = 0;
-
-		}
+		
 	}
 	return 1;
 }
