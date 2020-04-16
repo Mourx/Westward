@@ -29,7 +29,9 @@ int main() {
 	int targetIndex = 0;
 	Combatant* targ = combat->getUnit(targetIndex);
 	textTarget.setString(targ->unit->getName());
-	
+	combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+
+
 	while (window.isOpen()) {
 
 		sf::Event event;
@@ -37,23 +39,35 @@ int main() {
 		{
 			if (event.type == sf::Event::Closed) window.close();
 			if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Left) {
-					targetIndex--;
-					if (targetIndex <= 0) targetIndex = 0;
-					targ = combat->getUnit(targetIndex);
-					textTarget.setString(targ->unit->getName());
+				
+				if (combat->getPhase() == TARGET){
+					if (event.key.code == sf::Keyboard::Left) {
+						targetIndex--;
+						if (targetIndex <= 0) targetIndex = 0;
+						targ = combat->getUnit(targetIndex);
+						combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+						textTarget.setString(targ->unit->getName());
+					}
+					if (event.key.code == sf::Keyboard::Right) {
+						targetIndex++;
+						if (targetIndex >= combat->getUnitsSize()) targetIndex = combat->getUnitsSize() - 1;
+						targ = combat->getUnit(targetIndex);
+						combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+						textTarget.setString(targ->unit->getName());
+					}
+					if (event.key.code == sf::Keyboard::Return) {
+						combat->DoAction(targetIndex);
+					}
 				}
-				if (event.key.code == sf::Keyboard::Right) {
-					targetIndex++;
-					if (targetIndex >= combat->getUnitsSize()) targetIndex = combat->getUnitsSize()-1;
-					targ = combat->getUnit(targetIndex);
-					textTarget.setString(targ->unit->getName());
+				if (combat->getPhase() == ACTION) {
+					if (event.key.code == sf::Keyboard::Return) {
+						combat->DoAction(0);
+					}
 				}
-				combat->DoAction(targetIndex);
 			}
 		}
 
-		window.clear();
+		window.clear(sf::Color::Blue);
 		// add images here
 		window.draw(textTarget);
 		combat->Draw(&window);

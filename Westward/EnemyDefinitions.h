@@ -4,7 +4,7 @@
 #include <fstream>
 #include "enums.h"
 #include "Modifier.h"
-
+#include <SFML/Graphics.hpp>
 using namespace Json;
 using namespace std;
 
@@ -26,7 +26,8 @@ protected:
 	float challengeValue;
 	bool bFrontLine;
 	bool bHasSpells;
-
+	sf::Sprite* icon = new sf::Sprite();
+	sf::Texture texture;
 	vector<Modifier*> mods;
 	float comHealth;
 	float comDamage;
@@ -55,6 +56,12 @@ public:
 		bFrontLine = obj[EnemyType]["frontLine"].asBool();
 		bHasSpells = obj[EnemyType]["hasSpells"].asBool();
 		//spellList = obj[EnemyType]["spellList"].asInt();
+
+
+		if (!texture.loadFromFile("spriteEnemies.png", sf::IntRect((EnemyType % 4) * 32, (EnemyType / 4) * 32, 32, 32))) {
+			cout << "yikes" << endl;
+		}
+		icon->setTexture(texture);
 	}
 	float getHealth() {
 		return health;
@@ -112,6 +119,15 @@ public:
 		comHealth = health * (1.0 + totHealthMod / 100.0);
 		comDamage = damage * (1.0 + totHealthMod / 100.0);
 		comSpeed = speed * (1.0 + totHealthMod / 100.0);
+	}
+	void setPosition(int x, int y) {
+		icon->setPosition(x, y);
+	}
+	sf::Sprite getSprite() {
+		return *icon;
+	}
+	sf::Vector2f getPosition() {
+		return icon->getPosition();
 	}
 };
 

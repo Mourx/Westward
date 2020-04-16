@@ -15,7 +15,11 @@ public:
 	void ShowGrid();
 	Combatant* getUnit(int index);
 	void Draw(sf::RenderWindow* window);
+	void setCursorPosition(int x, int y);
 	int getUnitsSize();
+	void Attack(Combatant* target);
+	std::vector<Combatant*> getUnitList(bool bPlayer);
+	CombatPhases getPhase();
 private:
 	std::vector<Combatant*> units;
 	std::vector<Combatant*> enemyBack;
@@ -26,13 +30,15 @@ private:
 	std::vector<TileRow*> combatGrid;
 	std::vector<sf::Text> combatGridText;
 	sf::Font font;
+	sf::Texture cursorTexture;
+	sf::Sprite cursor;
 	void generateTurnOrder();
 	void AdvanceTurn();
 	bool bValidAction = false;
 	bool bValidTarget = false;
 	bool bIsCombat = false;
 	int turn = 0;
-	CombatPhases phase = TARGET;
+	CombatPhases phase = ACTION;
 };
 
 

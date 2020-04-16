@@ -80,6 +80,7 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 			text.setFont(font);
 			if (tile->getCombatant() != NULL) {
 				text.setString(tile->getCombatant()->unit->getName());
+				tile->getCombatant()->unit->setPosition(100+ i * 50, 100 + j * 50);
 			}
 			else {
 				text.setString("| | | |");
@@ -92,14 +93,25 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 			combatGridText.push_back(text);
 		}
 	}
+	
+	cursorTexture.loadFromFile("cursor.png");
+	cursor.setTexture(cursorTexture);
 	ShowGrid();
 	
 	generateTurnOrder();
 }
 
+void Combat::setCursorPosition(int x, int y) {
+	cursor.setPosition(x, y);
+}
+
 void Combat::Draw(sf::RenderWindow* window) {
+	window->draw(cursor);
 	for (sf::Text t : combatGridText) {
 		window->draw(t);
+	}
+	for (Combatant* c : units) {
+		window->draw(c->unit->getSprite());
 	}
 }
 
@@ -138,13 +150,10 @@ int Combat::getUnitsSize() {
 }
 
 bool Combat::DoAction(int action) {
-	//string actionStr;
 	cout << endl;
 	cout << turnOrder[turn]->unit->getName() << "'s turn. Choose Action:  \n0\tAttack\n1\tDefend" << endl;
-	//getline(cin, actionStr);
-	//int action = stoi(actionStr);
 	if (turnOrder[turn]->IsPlayer()) {
-		if (phase == TARGET) {
+		if (phase == ACTION) {
 			CombatActions acts = CombatActions(action);
 			switch (acts) {
 			case ATTACK:
@@ -167,9 +176,10 @@ bool Combat::DoAction(int action) {
 		}
 
 		if (phase == TARGET){
-			if (combatGrid[action/4]->TileContains(action/4)) {
+
+			if (combatGrid[action%4]->TileContains(action/4)) {
 				//attack target
-				// Attack(getUnit(action);
+				Attack(combatGrid[action % 4]->getTile(action/4)->getCombatant());
 				bValidTarget = true;
 			}
 			else {
@@ -177,6 +187,35 @@ bool Combat::DoAction(int action) {
 			}
 		}
 	}
+	else {
+		std::vector<Combatant*> playerUnits = getUnitList(true);
+		Attack(playerUnits[rand() % playerUnits.size()]);
+	}
+}
+
+void Combat::Attack(Combatant*) {
+	cout << "Kapow!" << endl;
+}
+
+CombatPhases Combat::getPhase() {
+	return phase;
+}
+
+std::vector<Combatant*> Combat::getUnitList(bool bPlayer) {
+	std::vector<Combatant*> list;
+	for (Combatant* c : units) {
+		if (bPlayer){
+			if (c->IsPlayer()) {
+				list.push_back(c);
+			}
+		}
+		else {
+			if (!c->IsPlayer()) {
+				list.push_back(c);
+			}
+		}
+	}
+	return list;
 }
 
 void Combat::AdvanceTurn() {
