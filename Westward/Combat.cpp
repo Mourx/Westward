@@ -177,20 +177,24 @@ bool Combat::DoAction(int action) {
 
 		if (phase == TARGET){
 
-			if (combatGrid[action%4]->TileContains(action/4)) {
+			if (units[action] != turnOrder[turn]) {
 				//attack target
-				Attack(combatGrid[action % 4]->getTile(action/4)->getCombatant());
+				Attack(units[action]);
 				bValidTarget = true;
+				phase = ACTION;
+				AdvanceTurn();
 			}
 			else {
 				cout << "Please select a valid target" << endl;
 			}
 		}
 	}
-	else {
+	while(!turnOrder[turn]->IsPlayer()){
 		std::vector<Combatant*> playerUnits = getUnitList(true);
 		Attack(playerUnits[rand() % playerUnits.size()]);
+		AdvanceTurn();
 	}
+	
 }
 
 void Combat::Attack(Combatant*) {
@@ -225,10 +229,7 @@ void Combat::AdvanceTurn() {
 		turn = 0;
 
 	}
-	if (!turnOrder[turn]->IsPlayer()) {
-		DoAction(0);
-		DoAction(0);
-	}
+
 }
 
 bool Combat::RunCombat() {

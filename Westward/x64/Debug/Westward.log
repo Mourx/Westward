@@ -8,5 +8,27 @@ c:\users\joel\documents\westward\westward\westward\combat.cpp(90): warning C4244
 c:\users\joel\documents\westward\westward\westward\combat.cpp(72): warning C4390: ';': empty controlled statement found; is this the intent?
 c:\users\joel\documents\westward\westward\westward\combat.cpp(105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\joel\documents\westward\westward\westward\combat.cpp(149): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\joel\documents\westward\westward\westward\combat.cpp(194): warning C4715: 'Combat::DoAction': not all control paths return a value
+  main.cpp
+c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(119): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(120): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(121): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(124): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\joel\documents\westward\westward\westward\main.cpp(32): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joel\documents\westward\westward\westward\main.cpp(48): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joel\documents\westward\westward\westward\main.cpp(55): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joel\documents\westward\westward\westward\main.cpp(23): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
+c:\users\joel\documents\westward\westward\westward\combat.cpp(198): warning C4715: 'Combat::DoAction': not all control paths return a value
   Westward.vcxproj -> C:\Users\Joel\Documents\Westward\Westward\x64\Debug\Westward.exe
