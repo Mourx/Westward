@@ -59,7 +59,7 @@ int main() {
 						combat->DoAction(targetIndex);
 					}
 				}
-				if (combat->getPhase() == ACTION) {
+				else if (combat->getPhase() == ACTION) {
 					if (event.key.code == sf::Keyboard::Return) {
 						combat->DoAction(0);
 					}

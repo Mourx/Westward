@@ -107,9 +107,9 @@ void Combat::setCursorPosition(int x, int y) {
 
 void Combat::Draw(sf::RenderWindow* window) {
 	window->draw(cursor);
-	for (sf::Text t : combatGridText) {
-		window->draw(t);
-	}
+	//for (sf::Text t : combatGridText) {
+	//	window->draw(t);
+	//}
 	for (Combatant* c : units) {
 		window->draw(c->unit->getSprite());
 	}
@@ -175,7 +175,7 @@ bool Combat::DoAction(int action) {
 			}
 		}
 
-		if (phase == TARGET){
+		else if (phase == TARGET){
 
 			if (units[action] != turnOrder[turn]) {
 				//attack target
