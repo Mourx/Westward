@@ -14,8 +14,8 @@ int main() {
 	cout << "A group of Enemies Approach!" << endl << endl;
 	vector<Combatant*> playerMain;
 	vector<Combatant*> playerSupport;
-	playerMain.push_back(new Combatant(new Enemy(1),true));
-	playerSupport.push_back(new Combatant(new Enemy(2),true));
+	playerMain.push_back(new Combatant(new CombatActor(0,true),true));
+	playerSupport.push_back(new Combatant(new CombatActor(1,true),true));
 	Encounter* encounter = new Encounter(1);
 	Combat* combat = new Combat(playerMain,playerSupport,encounter);
 	
@@ -80,7 +80,5 @@ int main() {
 		//cout << "name: " << c->unit->getName() << endl;
 	}
 	
-
-	getchar();
 	return 0;
 }

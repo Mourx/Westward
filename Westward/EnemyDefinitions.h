@@ -8,12 +8,12 @@
 using namespace Json;
 using namespace std;
 
-class VirtualEnemy {
+class BaseCombatant {
 public:
-	VirtualEnemy() {
+	BaseCombatant() {
 
 	}
-	~VirtualEnemy() {
+	~BaseCombatant() {
 
 	}
 	
@@ -34,11 +34,16 @@ protected:
 	float comSpeed;
 };
 
-class Enemy : VirtualEnemy {
+class CombatActor : BaseCombatant {
 public:
-	Enemy(int EnemyType) {
-		ifstream monStream("enemies.json");
-
+	CombatActor(int EnemyType, bool bPlayer) {
+		ifstream monStream;
+		if (bPlayer) {
+			monStream.open("players.json");
+		}
+		else {
+			monStream.open("enemies.json");
+		}
 		CharReaderBuilder reader;
 		Value obj;
 		string errs;
@@ -57,9 +62,15 @@ public:
 		bHasSpells = obj[EnemyType]["hasSpells"].asBool();
 		//spellList = obj[EnemyType]["spellList"].asInt();
 
-
-		if (!texture.loadFromFile("spriteEnemies.png", sf::IntRect((EnemyType % 4) * 32, (EnemyType / 4) * 32, 32, 32))) {
-			cout << "yikes" << endl;
+		if (bPlayer) {
+			if (!texture.loadFromFile("playerSprites.png", sf::IntRect((EnemyType % 4) * 32, (EnemyType / 4) * 32, 32, 32))) {
+				cout << "yikes" << endl;
+			}
+		}
+		else {
+			if (!texture.loadFromFile("spriteEnemies.png", sf::IntRect((EnemyType % 4) * 32, (EnemyType / 4) * 32, 32, 32))) {
+				cout << "yikes" << endl;
+			}
 		}
 		icon->setTexture(texture);
 	}

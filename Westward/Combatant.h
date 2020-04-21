@@ -4,9 +4,9 @@
 class Combatant
 {
 public:
-	Combatant(Enemy* e, bool bPlayer);
+	Combatant(CombatActor* e, bool bPlayer);
 	~Combatant();
-	Enemy* unit;
+	CombatActor* unit;
 	bool IsPlayer();
 private:
 	bool bIsPlayer = false;

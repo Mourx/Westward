@@ -2,7 +2,7 @@
 
 
 
-Combatant::Combatant(Enemy* e, bool bPlayer)
+Combatant::Combatant(CombatActor* e, bool bPlayer)
 {
 	unit = e;
 	bIsPlayer = bPlayer;

@@ -1,5 +1,5 @@
 #pragma once
 
 
-int WINDOW_HEIGHT = 600;
-int WINDOW_WIDTH = 600;
+int WINDOW_HEIGHT = 640;
+int WINDOW_WIDTH = 640;

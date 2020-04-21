@@ -69,6 +69,9 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	combatGrid.push_back(pRFront);
 	combatGrid.push_back(pRBack);
 
+	playerSquare.loadFromFile("tiles.png", sf::IntRect(0, 0, 32, 32));
+	enemySquare.loadFromFile("tiles.png", sf::IntRect(32, 0, 32, 32));
+
 	if (!font.loadFromFile("arial.ttf"));
 
 	for (int j = 0; j < combatGrid.size();j++) {
@@ -80,7 +83,7 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 			text.setFont(font);
 			if (tile->getCombatant() != NULL) {
 				text.setString(tile->getCombatant()->unit->getName());
-				tile->getCombatant()->unit->setPosition(100+ i * 50, 100 + j * 50);
+				tile->getCombatant()->unit->setPosition(60+ i * 50, 60 + j * 50);
 			}
 			else {
 				text.setString("| | | |");
@@ -91,9 +94,38 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 			text.setFillColor(sf::Color::White);
 			text.setCharacterSize(14);
 			combatGridText.push_back(text);
+			sf::Sprite* spr = new sf::Sprite();
+			spr->setPosition(60 + i * 50, 60 + j * 50);
+			if (j >= 2) {
+				spr->setTexture(enemySquare);
+			}
+			else {
+				spr->setTexture(playerSquare);
+			}
+			combatGridIcons.push_back(spr);
 		}
 	}
 	
+	backgroundTexture.loadFromFile("grass.png");
+	background.setTexture(backgroundTexture);
+	background.setPosition(0, 0);
+
+	dialogTexture.loadFromFile("dialogOptions.png");
+	dialog.setTexture(dialogTexture);
+	dialog.setPosition(50, 250);
+
+	statsTexture.loadFromFile("dialogStats.png");
+	stats.setTexture(statsTexture);
+	stats.setPosition(250, 50);
+
+	combatTexture.loadFromFile("dialogCombat.png");
+	combat.setTexture(combatTexture);
+	combat.setPosition(50, 50);
+
+	heartTexture.loadFromFile("heart.png");
+	heart.setTexture(heartTexture);
+	heart.setPosition(260, 60);
+
 	cursorTexture.loadFromFile("cursor.png");
 	cursor.setTexture(cursorTexture);
 	ShowGrid();
@@ -106,6 +138,14 @@ void Combat::setCursorPosition(int x, int y) {
 }
 
 void Combat::Draw(sf::RenderWindow* window) {
+	window->draw(background);
+	window->draw(combat);
+	window->draw(dialog);
+	window->draw(stats);
+	window->draw(heart);
+	for (sf::Sprite* s : combatGridIcons) {
+		window->draw(*s);
+	}
 	window->draw(cursor);
 	//for (sf::Text t : combatGridText) {
 	//	window->draw(t);

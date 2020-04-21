@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "name":"Hero",
+    "damage":5,
+    "health":10,
+    "speed":5,
+    "level":1,
+    "challengeValue":0.1,
+    "frontLine" : true,
+    "hasSpells": false,
+    "spellList": null
+  },
+  {
+    "id": 1,
+    "name":"Cow",
+    "damage":10,
+    "health":20,
+    "speed":3,
+    "level":1,
+    "challengeValue":0.25,
+    "frontLine" : false,
+    "hasSpells": false,
+    "spellList": null
+  },
+  {
+    "id": -1,
+    "name":"DummyFriend",
+    "damage":0,
+    "health":0,
+    "speed":0,
+    "level":0,
+    "challengeValue":0,
+    "frontLine" : true,
+    "hasSpells": false,
+    "spellList": null
+  },
+]
