@@ -1,5 +1,6 @@
 #pragma once
 #include "Combat.h"
+#include "ActionPrompt.h"
 #include <iostream>
 #include "json.h"
 #include <fstream>
@@ -29,7 +30,10 @@ int main() {
 	int targetIndex = 0;
 	Combatant* targ = combat->getUnit(targetIndex);
 	textTarget.setString(targ->unit->getName());
-	combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+	combat->setCursorPosition(targ);
+	int actionIndex = 0;
+	ActionPrompt* action = combat->getAction(actionIndex);
+	combat->setCursorPosition(action);
 
 
 	while (window.isOpen()) {
@@ -45,14 +49,14 @@ int main() {
 						targetIndex--;
 						if (targetIndex <= 0) targetIndex = 0;
 						targ = combat->getUnit(targetIndex);
-						combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+						combat->setCursorPosition(targ);
 						textTarget.setString(targ->unit->getName());
 					}
 					if (event.key.code == sf::Keyboard::Right) {
 						targetIndex++;
 						if (targetIndex >= combat->getUnitsSize()) targetIndex = combat->getUnitsSize() - 1;
 						targ = combat->getUnit(targetIndex);
-						combat->setCursorPosition(targ->unit->getPosition().x, targ->unit->getPosition().y);
+						combat->setCursorPosition(targ);
 						textTarget.setString(targ->unit->getName());
 					}
 					if (event.key.code == sf::Keyboard::Return) {
@@ -60,8 +64,20 @@ int main() {
 					}
 				}
 				else if (combat->getPhase() == ACTION) {
+					if (event.key.code == sf::Keyboard::Left) {
+						actionIndex--;
+						if (actionIndex <= 0) actionIndex = 0;
+						action = combat->getAction(actionIndex);
+						combat->setCursorPosition(action);
+					}
+					if (event.key.code == sf::Keyboard::Right) {
+						actionIndex++;
+						if (actionIndex >= combat->getActionAmount()) actionIndex = combat->getActionAmount() - 1;
+						action = combat->getAction(actionIndex);
+						combat->setCursorPosition(action);
+					}
 					if (event.key.code == sf::Keyboard::Return) {
-						combat->DoAction(0);
+						combat->DoAction(action->getAction());
 					}
 				}
 			}

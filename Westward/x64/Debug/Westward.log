@@ -1,13 +1,25 @@
 ﻿  Combat.cpp
-c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(131): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(132): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(135): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(95): warning C4553: '==': result of expression not used; did you intend '='?
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(8): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(93): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(147): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(75): warning C4390: ';': empty controlled statement found; is this the intent?
-c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(137): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(189): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(238): warning C4715: 'Combat::DoAction': not all control paths return a value
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(173): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(234): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\combat.cpp(244): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(95): warning C4553: '==': result of expression not used; did you intend '='?
+c:\users\joel\documents\westward\westwardproject\westward\westward\enemydefinitions.h(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\joel\documents\westward\westwardproject\westward\westward\main.cpp(24): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
   Westward.vcxproj -> C:\Users\Joel\Documents\Westward\WestWardProject\Westward\x64\Debug\Westward.exe

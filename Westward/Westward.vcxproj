@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ActionPrompt.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Combatant.h" />
     <ClInclude Include="Encounter.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Values.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionPrompt.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Combatant.cpp" />
     <ClCompile Include="Encounter.cpp" />

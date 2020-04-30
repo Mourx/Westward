@@ -4,23 +4,31 @@
 #include "TileRow.h"
 #include "Encounter.h"
 #include "enums.h"
+#include "ActionPrompt.h"
 #include <SFML/Graphics.hpp>
 class Combat
 {
 public:
 	Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playerSupport, Encounter* encounter);
 	~Combat();
-	bool DoAction(int action);
+	bool DoAction(CombatActions action);
+	bool DoAction(int target);
+	void generateActions();
 	bool RunCombat();
 	void ShowGrid();
 	Combatant* getUnit(int index);
 	void Draw(sf::RenderWindow* window);
-	void setCursorPosition(int x, int y);
+	void setCursorPosition(Combatant* targ);
+	void setCursorPosition(ActionPrompt* act);
 	int getUnitsSize();
-	void Attack(Combatant* target);
+	void updateStrings(Combatant* targ);
+	void Attack(Combatant* user, Combatant* target);
 	std::vector<Combatant*> getUnitList(bool bPlayer);
 	CombatPhases getPhase();
+	ActionPrompt* getAction(int actionIndex);
+	int getActionAmount();
 private:
+	void changePhase(CombatPhases p);
 	std::vector<Combatant*> units;
 	std::vector<Combatant*> enemyBack;
 	std::vector<Combatant*> enemyFront;
@@ -34,7 +42,8 @@ private:
 	sf::Texture playerSquare;
 	sf::Texture enemySquare;
 	sf::Texture cursorTexture;
-	sf::Sprite cursor;
+	sf::Sprite cursorTarget;
+	sf::Sprite cursorAction;
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 	sf::Texture combatTexture;
@@ -45,6 +54,12 @@ private:
 	sf::Sprite stats;
 	sf::Texture heartTexture;
 	sf::Sprite heart;
+	sf::Text inspectHealth;
+	sf::Text inspectDamage;
+	sf::Text inspectDefense;
+	sf::Text inspectName;
+	Combatant* target;
+	vector<ActionPrompt*> availableActions;
 	void generateTurnOrder();
 	void AdvanceTurn();
 	bool bValidAction = false;

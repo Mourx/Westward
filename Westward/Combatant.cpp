@@ -16,3 +16,7 @@ Combatant::~Combatant()
 bool Combatant::IsPlayer() {
 	return bIsPlayer;
 }
+
+bool Combatant::IsDead() {
+	return bIsDead;
+}

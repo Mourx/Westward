@@ -8,7 +8,10 @@ public:
 	~Combatant();
 	CombatActor* unit;
 	bool IsPlayer();
+	bool IsDead();
+	void setDead(bool b) { bIsDead = b; }
 private:
 	bool bIsPlayer = false;
+	bool bIsDead = false;
 };
 

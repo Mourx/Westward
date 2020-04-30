@@ -20,6 +20,7 @@ public:
 protected:
 	float health;
 	float damage;
+	float defense;
 	float speed;
 	float level;
 	string name;
@@ -30,8 +31,14 @@ protected:
 	sf::Texture texture;
 	vector<Modifier*> mods;
 	float comHealth;
+	float comDefense;
 	float comDamage;
 	float comSpeed;
+	bool bIsDead;
+	float totHealthMod = 0;
+	float totDamageMod = 0;
+	float totSpeedMod = 0;
+	float totDefenseMod = 0;
 };
 
 class CombatActor : BaseCombatant {
@@ -54,6 +61,7 @@ public:
 
 		name.assign(obj[EnemyType]["name"].asString());
 		health = obj[EnemyType]["health"].asFloat();
+		defense = obj[EnemyType]["defense"].asFloat();
 		damage = obj[EnemyType]["damage"].asFloat();
 		speed = obj[EnemyType]["speed"].asFloat();
 		level = obj[EnemyType]["level"].asFloat();
@@ -74,11 +82,32 @@ public:
 		}
 		icon->setTexture(texture);
 	}
-	float getHealth() {
-		return health;
+	void calcStats() {
+		comHealth = health * (1.0 + totHealthMod / 100.0);
+		comDamage = damage * (1.0 + totHealthMod / 100.0);
+		comSpeed = speed * (1.0 + totHealthMod / 100.0);
+		comDefense = defense * (1.0 + totDefenseMod / 100.0);
 	}
-	float getDamage() {
-		return damage;
+	void modifyHealth(float damage) {
+		health -= damage;
+		if (health <= 0) {
+			health = 0;
+			bIsDead == true;
+		}
+	}
+	bool checkDead() {
+		return bIsDead;
+	}
+
+	float getCurrentHealth() {
+		return comHealth;
+	}
+	float getCurrentDefense() {
+		return comDefense;
+	}
+
+	float getCurrentDamage() {
+		return comDamage;
 	}
 	float getSpeed() {
 		return speed;
@@ -111,9 +140,10 @@ public:
 		}
 	}
 	void ApplyModifiers() {
-		float totHealthMod = 0;
-		float totDamageMod = 0;
-		float totSpeedMod = 0;
+		totHealthMod = 0;
+		totDamageMod = 0;
+		totSpeedMod = 0;
+		totDefenseMod = 0;
 		for (Modifier* m : mods) {
 			switch (m->getAtt()) {
 			case HEALTH:
@@ -127,9 +157,7 @@ public:
 				break;
 			}
 		}
-		comHealth = health * (1.0 + totHealthMod / 100.0);
-		comDamage = damage * (1.0 + totHealthMod / 100.0);
-		comSpeed = speed * (1.0 + totHealthMod / 100.0);
+
 	}
 	void setPosition(int x, int y) {
 		icon->setPosition(x, y);

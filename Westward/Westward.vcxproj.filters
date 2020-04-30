@@ -48,6 +48,9 @@
     <ClInclude Include="Values.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ActionPrompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Modifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPrompt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -125,16 +125,52 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	heartTexture.loadFromFile("heart.png");
 	heart.setTexture(heartTexture);
 	heart.setPosition(260, 60);
+	inspectHealth.setFont(font);
+	inspectHealth.setCharacterSize(12);
+	inspectHealth.setPosition(280, 60);
+
+	inspectDefense.setFont(font);
+	inspectDefense.setCharacterSize(12);
+	inspectDefense.setPosition(280, 85);
+
+	inspectDamage.setFont(font);
+	inspectDamage.setCharacterSize(12);
+	inspectDamage.setPosition(280, 110);
+
+	inspectName.setFont(font);
+	inspectName.setCharacterSize(12);
+	inspectName.setPosition(280, 135);
 
 	cursorTexture.loadFromFile("cursor.png");
-	cursor.setTexture(cursorTexture);
+	cursorTarget.setTexture(cursorTexture);
+	cursorAction.setTexture(cursorTexture);
+	cursorAction.setScale(2, 0.8);
 	ShowGrid();
 	
 	generateTurnOrder();
+	generateActions();
 }
 
-void Combat::setCursorPosition(int x, int y) {
-	cursor.setPosition(x, y);
+void Combat::setCursorPosition(Combatant* targ) {
+	target = targ;
+	cursorTarget.setPosition(target->unit->getPosition().x, target->unit->getPosition().y);
+	updateStrings(target);
+	
+}
+
+void Combat::updateStrings(Combatant* targ) {
+	inspectHealth.setString(to_string((int)targ->unit->getCurrentHealth()));
+	inspectName.setString(targ->unit->getName());
+	inspectDamage.setString(to_string((int)targ->unit->getCurrentHealth()));
+	inspectDefense.setString(to_string((int)targ->unit->getCurrentDefense()));
+}
+
+void Combat::setCursorPosition(ActionPrompt* act) {
+	cursorAction.setPosition(act->name.getPosition().x-5,act->name.getPosition().y-5);
+}
+
+int Combat::getActionAmount() {
+	return availableActions.size();
 }
 
 void Combat::Draw(sf::RenderWindow* window) {
@@ -143,10 +179,19 @@ void Combat::Draw(sf::RenderWindow* window) {
 	window->draw(dialog);
 	window->draw(stats);
 	window->draw(heart);
+	window->draw(inspectHealth);
+	window->draw(inspectDefense);
+	window->draw(inspectDamage);
+	window->draw(inspectName);
+	
+	window->draw(cursorAction);
+	for (ActionPrompt* a : availableActions) {
+		window->draw(a->name);
+	}
 	for (sf::Sprite* s : combatGridIcons) {
 		window->draw(*s);
 	}
-	window->draw(cursor);
+	window->draw(cursorTarget);
 	//for (sf::Text t : combatGridText) {
 	//	window->draw(t);
 	//}
@@ -189,7 +234,27 @@ int Combat::getUnitsSize() {
 	return units.size();
 }
 
-bool Combat::DoAction(int action) {
+void Combat::generateActions() {
+	availableActions.clear();
+	if (turnOrder[turn]->IsPlayer() && phase == ACTION) {
+		availableActions.push_back(new ActionPrompt(ATTACK));
+		availableActions.push_back(new ActionPrompt(DEFEND));
+	}
+	for (int i = 0; i < availableActions.size();i++) {
+		availableActions[i]->name.setPosition(75 + i * 100, 280);
+	}
+}
+
+void Combat::changePhase(CombatPhases p) {
+	phase = p;
+	generateActions();
+}
+
+ActionPrompt* Combat::getAction(int actionIndex) {
+	return availableActions[actionIndex];
+}
+
+bool Combat::DoAction(CombatActions action) {
 	cout << endl;
 	cout << turnOrder[turn]->unit->getName() << "'s turn. Choose Action:  \n0\tAttack\n1\tDefend" << endl;
 	if (turnOrder[turn]->IsPlayer()) {
@@ -208,36 +273,49 @@ bool Combat::DoAction(int action) {
 				//add defense modifier
 				bValidAction = true;
 				AdvanceTurn();
-				return true;
 				break;
 			default:
 				return false;
 			}
 		}
-
-		else if (phase == TARGET){
-
-			if (units[action] != turnOrder[turn]) {
-				//attack target
-				Attack(units[action]);
-				bValidTarget = true;
-				phase = ACTION;
-				AdvanceTurn();
-			}
-			else {
-				cout << "Please select a valid target" << endl;
-			}
-		}
 	}
 	while(!turnOrder[turn]->IsPlayer()){
 		std::vector<Combatant*> playerUnits = getUnitList(true);
-		Attack(playerUnits[rand() % playerUnits.size()]);
+		Attack(turnOrder[turn],playerUnits[rand() % playerUnits.size()]);
 		AdvanceTurn();
 	}
-	
+	return true;
 }
 
-void Combat::Attack(Combatant*) {
+bool Combat::DoAction(int target) {
+	if (units[target] != turnOrder[turn]) {
+		//attack target
+		Attack(turnOrder[turn], units[target]);
+		bValidTarget = true;
+		phase = ACTION;
+		AdvanceTurn();
+	}
+	else {
+		cout << "Please select a valid target" << endl;
+	}
+	while (!turnOrder[turn]->IsPlayer()) {
+		std::vector<Combatant*> playerUnits = getUnitList(true);
+		Attack(turnOrder[turn],playerUnits[rand() % playerUnits.size()]);
+		AdvanceTurn();
+	}
+	return true;
+}
+
+void Combat::Attack(Combatant* user, Combatant* target) {
+	float attack = user->unit->getCurrentDamage();
+	float defense = target->unit->getCurrentDefense();
+	float levelU = user->unit->getLevel();
+	float levelT = target->unit->getLevel();
+	float damage = (attack * levelU) - (defense * levelT);
+	target->unit->modifyHealth(damage);
+	if (target->unit->checkDead()) {
+		target->setDead(target->unit->checkDead());
+	}
 	cout << "Kapow!" << endl;
 }
 
@@ -265,6 +343,10 @@ std::vector<Combatant*> Combat::getUnitList(bool bPlayer) {
 void Combat::AdvanceTurn() {
 	turnOrder[turn]->unit->tickModifiers();
 	turn++;
+	for (Combatant* c : units) {
+		c->unit->calcStats();
+	}
+	updateStrings(target);
 	if (turn >= turnOrder.size()) {
 		turn = 0;
 
@@ -300,5 +382,7 @@ void Combat::generateTurnOrder() {
 	sort(turnOrder.begin(),turnOrder.end(),CompSpeeds);
 	for (Combatant* c : turnOrder) {
 		//cout << c->unit->getName() << endl;
+		c->unit->ApplyModifiers();
+		c->unit->calcStats();
 	}
 }
