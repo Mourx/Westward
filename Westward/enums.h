@@ -18,7 +18,9 @@ enum CombatTargets {
 
 enum CombatPhases {
 	ACTION,
-	TARGET
+	TARGET,
+	PLAYER_WIN,
+	PLAYER_LOSS
 };
 
 enum Attributes {

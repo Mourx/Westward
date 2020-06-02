@@ -8,6 +8,7 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	std::srand(std::time(nullptr));
 	for (Combatant* c : playerMain) {
 		units.push_back(c);
+		totalPlayers++;
 		if (c->unit->getFrontLine()) {
 			playerFront.push_back(c);
 		}
@@ -17,6 +18,7 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	}
 	for (Combatant* c : playerSupport) {
 		units.push_back(c);
+		totalPlayers++;
 		if (c->unit->getFrontLine()) {
 			playerFront.push_back(c);
 		}
@@ -27,6 +29,7 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	std::vector<Combatant*> enemies = encounter->getEnemies();
 	for (Combatant* c : enemies) {
 		units.push_back(c);
+		totalEnemies++;
 		if (c->unit->getFrontLine()) {
 			enemyFront.push_back(c);
 		}
@@ -129,10 +132,16 @@ Combat::Combat(std::vector<Combatant*> playerMain, std::vector<Combatant*> playe
 	inspectHealth.setCharacterSize(12);
 	inspectHealth.setPosition(280, 60);
 
+	shieldTexture.loadFromFile("shield.png");
+	shield.setTexture(shieldTexture);
+	shield.setPosition(260, 85);
 	inspectDefense.setFont(font);
 	inspectDefense.setCharacterSize(12);
 	inspectDefense.setPosition(280, 85);
 
+	swordTexture.loadFromFile("sword.png");
+	sword.setTexture(swordTexture);
+	sword.setPosition(260, 110);
 	inspectDamage.setFont(font);
 	inspectDamage.setCharacterSize(12);
 	inspectDamage.setPosition(280, 110);
@@ -179,6 +188,8 @@ void Combat::Draw(sf::RenderWindow* window) {
 	window->draw(dialog);
 	window->draw(stats);
 	window->draw(heart);
+	window->draw(sword);
+	window->draw(shield);
 	window->draw(inspectHealth);
 	window->draw(inspectDefense);
 	window->draw(inspectDamage);
@@ -316,6 +327,12 @@ void Combat::Attack(Combatant* user, Combatant* target) {
 	target->unit->modifyHealth(damage);
 	if (target->unit->checkDead()) {
 		target->setDead(target->unit->checkDead());
+		if (target->IsPlayer()) {
+			deadPlayers++;
+		}
+		else {
+			deadEnemies++;
+		}
 		for (int i = 0; i < turnOrder.size(); i++) {
 			if (turnOrder[i] == target) {
 				cout << target->unit->getName() << endl;
@@ -355,7 +372,21 @@ std::vector<Combatant*> Combat::getUnitList(bool bPlayer) {
 	return list;
 }
 
+CombatPhases Combat::CheckCombatOver(CombatPhases currentPhase) {
+	if (deadEnemies == totalEnemies) {
+		return PLAYER_WIN;
+	}
+	if (deadPlayers == totalPlayers) {
+		return PLAYER_LOSS;
+	}
+	return currentPhase;
+
+}
+
 void Combat::AdvanceTurn() {
+	phase = CheckCombatOver(phase);
+	if (phase == PLAYER_WIN) {
+		cout << "PLAYER WINS!" << endl;
 	turnOrder[turn]->unit->tickModifiers();
 	turn++;
 	for (int i = 0; i < units.size();i++) {
@@ -365,11 +396,24 @@ void Combat::AdvanceTurn() {
 			i--;
 		}
 	}
+	if (phase == PLAYER_LOSS) {
+		cout << "PLAYER LOSS!" << endl;
+	}
+	else {
+		turnOrder[turn]->unit->tickModifiers();
+		turn++;
+		for (Combatant* c : units) {
+			c->unit->calcStats();
+		}
+		updateStrings(target);
+		if (turn >= turnOrder.size()) {
+			turn = 0;
 	updateStrings(target);
 	if (turn >= turnOrder.size()) {
 		generateTurnOrder();
 		turn = 0;
 
+		}
 	}
 
 }

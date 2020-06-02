@@ -22,6 +22,7 @@ public:
 	void setCursorPosition(ActionPrompt* act);
 	int getUnitsSize();
 	void updateStrings(Combatant* targ);
+	CombatPhases CheckCombatOver(CombatPhases currentPhase);
 	void Attack(Combatant* user, Combatant* target);
 	std::vector<Combatant*> getUnitList(bool bPlayer);
 	CombatPhases getPhase();
@@ -54,6 +55,10 @@ private:
 	sf::Sprite stats;
 	sf::Texture heartTexture;
 	sf::Sprite heart;
+	sf::Texture swordTexture;
+	sf::Sprite sword;
+	sf::Texture shieldTexture;
+	sf::Sprite shield;
 	sf::Text inspectHealth;
 	sf::Text inspectDamage;
 	sf::Text inspectDefense;
@@ -66,6 +71,10 @@ private:
 	bool bValidTarget = false;
 	bool bIsCombat = false;
 	int turn = 0;
+	int totalEnemies = 0;
+	int totalPlayers = 0;
+	int deadEnemies = 0;
+	int deadPlayers = 0;
 	CombatPhases phase = ACTION;
 };
 

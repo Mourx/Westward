@@ -94,6 +94,7 @@ public:
 			health = 0;
 			bIsDead = true;
 		}
+		cout << name << "'s health is " << health << "and they are " << bIsDead << endl;
 	}
 	bool checkDead() {
 		return bIsDead;
