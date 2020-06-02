@@ -312,9 +312,24 @@ void Combat::Attack(Combatant* user, Combatant* target) {
 	float levelU = user->unit->getLevel();
 	float levelT = target->unit->getLevel();
 	float damage = (attack * levelU) - (defense * levelT);
+	if (damage <= 0) damage = 0;
 	target->unit->modifyHealth(damage);
 	if (target->unit->checkDead()) {
 		target->setDead(target->unit->checkDead());
+		for (int i = 0; i < turnOrder.size(); i++) {
+			if (turnOrder[i] == target) {
+				cout << target->unit->getName() << endl;
+				turnOrder.erase(turnOrder.begin() + i);
+				
+				if (turn == i) {
+					turn--;
+				}
+				i--;
+				break;
+				
+			}
+			
+		}
 	}
 	cout << "Kapow!" << endl;
 }
@@ -343,11 +358,16 @@ std::vector<Combatant*> Combat::getUnitList(bool bPlayer) {
 void Combat::AdvanceTurn() {
 	turnOrder[turn]->unit->tickModifiers();
 	turn++;
-	for (Combatant* c : units) {
-		c->unit->calcStats();
+	for (int i = 0; i < units.size();i++) {
+		units[i]->unit->calcStats();
+		if (units[i]->IsDead()) {
+			units.erase(units.begin()+i);
+			i--;
+		}
 	}
 	updateStrings(target);
 	if (turn >= turnOrder.size()) {
+		generateTurnOrder();
 		turn = 0;
 
 	}
