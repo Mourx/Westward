@@ -12,31 +12,6 @@ c:\users\joel\documents\westward\westward\westward\combat.cpp(78): warning C4390
 c:\users\joel\documents\westward\westward\westward\combat.cpp(182): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
 c:\users\joel\documents\westward\westward\westward\combat.cpp(245): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
 c:\users\joel\documents\westward\westward\westward\combat.cpp(255): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Combatant.cpp
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(164): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Encounter.cpp
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(164): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\encounter.cpp(8): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Tile.cpp
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(164): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  TileRow.cpp
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(88): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(164): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   main.cpp
 c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\joel\documents\westward\westward\westward\enemydefinitions.h(87): warning C4244: '=': conversion from 'double' to 'float', possible loss of data

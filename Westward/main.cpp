@@ -91,7 +91,7 @@ int main() {
 
 	}
 
-	combat->RunCombat();
+	//combat->RunCombat();
 	for (Combatant* c : encounter->getEnemies()) {
 		//cout << "name: " << c->unit->getName() << endl;
 	}

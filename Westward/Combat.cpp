@@ -387,14 +387,6 @@ void Combat::AdvanceTurn() {
 	phase = CheckCombatOver(phase);
 	if (phase == PLAYER_WIN) {
 		cout << "PLAYER WINS!" << endl;
-	turnOrder[turn]->unit->tickModifiers();
-	turn++;
-	for (int i = 0; i < units.size();i++) {
-		units[i]->unit->calcStats();
-		if (units[i]->IsDead()) {
-			units.erase(units.begin()+i);
-			i--;
-		}
 	}
 	if (phase == PLAYER_LOSS) {
 		cout << "PLAYER LOSS!" << endl;
@@ -402,25 +394,28 @@ void Combat::AdvanceTurn() {
 	else {
 		turnOrder[turn]->unit->tickModifiers();
 		turn++;
-		for (Combatant* c : units) {
-			c->unit->calcStats();
+		for (int i = 0; i < units.size(); i++) {
+			units[i]->unit->calcStats();
+			if (units[i]->IsDead()) {
+				units.erase(units.begin() + i);
+				i--;
+			}
 		}
 		updateStrings(target);
 		if (turn >= turnOrder.size()) {
+			generateTurnOrder();
 			turn = 0;
-	updateStrings(target);
-	if (turn >= turnOrder.size()) {
-		generateTurnOrder();
-		turn = 0;
 
 		}
 	}
-
+	
 }
+
 
 bool Combat::RunCombat() {
 	bIsCombat = true;
 	while (bIsCombat) {
+		
 		for (Combatant* c : turnOrder) {
 			c->unit->ApplyModifiers();
 		}
